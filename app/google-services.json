@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1058812809632",
+    "project_id": "cryptography-cd2de",
+    "storage_bucket": "cryptography-cd2de.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058812809632:android:b3522bf6d9b49bb7be54c5",
+        "android_client_info": {
+          "package_name": "com.appsvgalore.cryptoandroid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgoPWYTYwAMXEXy5PK10yotFwNZ2wkhW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

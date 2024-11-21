@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CryptoAndroid</string>
+    <string name="couldnt_reach_server">Couldn\'t reach server</string>
+</resources>
