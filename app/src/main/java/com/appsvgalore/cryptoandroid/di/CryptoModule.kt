@@ -1,12 +1,18 @@
 package com.appsvgalore.cryptoandroid.di
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import com.appsvgalore.cryptoandroid.data.remote.AuthInterceptor
 import com.appsvgalore.cryptoandroid.data.remote.CryptoAPI
 import com.appsvgalore.cryptoandroid.data.remote.HttpClient
 import com.appsvgalore.cryptoandroid.data.remote.HttpLogger
 import com.appsvgalore.cryptoandroid.data.repository.CryptoRepositoryImpl
+import com.appsvgalore.cryptoandroid.data.repository.UserDataRepositoryImpl
+import com.appsvgalore.cryptoandroid.datastore.UserPreferences
 import com.appsvgalore.cryptoandroid.domain.repository.CryptoRepository
+import com.appsvgalore.cryptoandroid.domain.repository.UserDataRepository
 import com.google.firebase.firestore.FirebaseFirestore
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,12 +65,21 @@ object CryptoModule {
 
     @Provides
     fun providesOkHttpClient(
-        httpLoggingInterceptor: HttpLoggingInterceptor
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: AuthInterceptor
     ): OkHttpClient {
         return HttpClient.setupOkHttpClient(
-            httpLoggingInterceptor
+            httpLoggingInterceptor,
+            authInterceptor
         )
     }
+
+    @Provides
+    fun providesAuthInterceptor(
+        userPreferencesDataSource: DataStore<UserPreferences>
+    ): AuthInterceptor = AuthInterceptor(
+        userPreferencesDataSource
+    )
 
     @Provides
     fun providesIODispatchers(): CoroutineDispatcher {
@@ -74,4 +89,13 @@ object CryptoModule {
     @Provides
     @Singleton
     fun providesLoggingInterceptor(): HttpLoggingInterceptor = HttpLogger.create()
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class CoreModule {
+    @Binds
+    internal abstract fun bindsUserDataRepository(
+        userDataRepositoryImpl: UserDataRepositoryImpl
+    ): UserDataRepository
 }

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "com.appsvgalore.cryptoandroid.datastore";
+option java_multiple_files = true;
+
+message UserPreferences {
+  string username = 1;
+  string security_key = 2;
+  string access = 3;
+}

@@ -5,10 +5,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 object HttpClient {
     fun setupOkHttpClient(
-        httpLoggingInterceptor: HttpLoggingInterceptor
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: AuthInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(authInterceptor)
             .build()
     }
 }
